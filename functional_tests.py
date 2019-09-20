@@ -51,7 +51,7 @@ class NewVisitorTest(unittest.TestCase):
 
         # the page updates again and now both items are on the list
         self.check_for_row_in_list_table('1. Buy flour')
-        self.check_for_row_in_list_table('1. Plan vacation')
+        self.check_for_row_in_list_table('2. Plan vacation')
 
         # the user can see that the site has generated a unique URL to access her list,
         # there is also some explanatory text about that
