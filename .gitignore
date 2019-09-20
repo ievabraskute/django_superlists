@@ -1,4 +1,7 @@
 db.sqlite3
 geckodriver.log
-__pycache__
+env-tdd
 *.pyc
+__pycache__
+.vscode
+.tool-versions
