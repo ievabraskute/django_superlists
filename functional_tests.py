@@ -28,32 +28,37 @@ class NewVisitorTest(unittest.TestCase):
             'Enter a to-do item'
         )
 
-        # she writes 'buy flour' into a text box.
-        inputbox.send_keys('buy flour')
+        # she writes 'Buy flour' into a text box.
+        inputbox.send_keys('Buy flour')
 
         # When she hits enter, the webpage updates and now the page shows
-        # '1: buy flour' as an item in the to-do list
+        # '1: Buy flour' as an item in the to-do list
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
 
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(
-            any(row.text == '1: buy four' for row in rows),
-            "New to-do item did not appear in table"
-        )
+        self.assertIn('1: Buy flour', [row.text for row in rows])
 
         # there is still a text box to write another to-do item in. She writes
-        # 'plan vacation'
-        self.fail('finish the test!')
+        # 'Plan vacation'
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('Plan vacation')
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(1)
 
         # the page updates again and now both items are on the list
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn('1: Buy flour', [row.text for row in rows])
+        self.assertIn('2: Plan vacation', [row.text for row in rows])
 
         # the user can see that the site has generated a unique URL to access her list,
         # there is also some explanatory text about that
+        self.fail('Finish the test!')
 
         # the user visits the unique URL an sees her to-do list
 
 
 if __name__ == '__main__':
-    unittest.main(warnings='ignore')
+    unittest.main()
